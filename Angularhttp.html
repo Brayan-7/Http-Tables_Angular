@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+<title>Ejemplo Angular</title>
+ <link rel="stylesheet" href="css/estilo.css">
+<script src= "http://ajax.googleapis.com/ajax/libs/angularjs/1.3.14/angular.min.js"></script>
+<body>
+<h1>Angular Http using Tables</h1>
+<center>
+<div ng-app="myApp" ng-controller="customersCtrl"> 
+
+<table border="2">
+    <tr>
+      <u><td align="center">No.</td></u>
+      <td align="center">NAME</td>
+      <td align="center">COUNTRY</td>
+    </tr>
+    <tr ng-repeat="x in names | orderBy : 'Country'">
+      <td>{{ $index + 1 }}</td>
+      <td>{{x.Name}}</td>
+      <td align="center">{{x.Country}}</td>
+    </tr>
+</table>
+</div>
+
+<script>
+var app = angular.module('myApp', []);
+app.controller('customersCtrl', function($scope, $http) {
+  $http.get("http://www.w3schools.com/angular/customers.php")
+  .success(function (response) {$scope.names = response.records;});
+});
+</script>
+</center>
+</body>
+</html>
